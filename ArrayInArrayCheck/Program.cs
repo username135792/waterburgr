@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+
 
 namespace ArrayInArrayCheck
 {
@@ -6,7 +8,19 @@ namespace ArrayInArrayCheck
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int example = 0;
+
+            Console.WriteLine("Номер примера.");
+            Console.ReadLine(example);
+            if example = 1
+            {
+             Console.WriteLine()
+            }
+        }
+        static void Example1(string[] args)
+        {
+
         }
     }
+
 }
