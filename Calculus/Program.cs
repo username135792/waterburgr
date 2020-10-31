@@ -2,6 +2,8 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Linq;
+using System.IO;
+using System.Threading;
 
 namespace Calculus
 {
@@ -9,69 +11,68 @@ namespace Calculus
     {
         static void Main(string[] args)
         {
-            string InputSpace = System.IO.File.ReadAllText(@"C:\Users\MSI\Desktop\input.txt");
+            double OutputNumber = 0;
+            string InputSpace = File.ReadAllText(@"C:\Users\MSI\Desktop\input.txt");
             string InputNoSpace = Regex.Replace(InputSpace, @"\s", "");
             string[] ValueArray = InputNoSpace.Split('-', '+', '/', '*');
             double FirstNumber = double.Parse(ValueArray[0]);
             double SecondNumber = double.Parse(ValueArray[1]);
             if (InputNoSpace.Contains('+'))
             {
-                double Output = Plus();
+                OutputNumber = Plus(FirstNumber, SecondNumber);
+                
             }
             else
             {
                 if (InputNoSpace.Contains('-'))
                 {
-                    double Output = Minus();
+                    OutputNumber = Minus(FirstNumber, SecondNumber);
+                    
                 }
                 else
                 {
                     if (InputNoSpace.Contains('/'))
                     {
-                        double Output = Divide();
+                        OutputNumber = Divide(FirstNumber, SecondNumber);
+                        
                     }
                     else
                     {
                         if (InputNoSpace.Contains('*'))
                         {
-                            double Output = Multiply();
+                            OutputNumber = Multiply(FirstNumber, SecondNumber);
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ошибка. Ваш пример не содержит знака");
+                            Thread.Sleep(5000);
+                            Environment.Exit(0);
                         }
                     }
                 }
             }
-            //C: \Users\MSI\Desktop
-            //создать пустой файл
-            System.IO.File.Create(@"C:\Users\MSI\Desktop");
-
-            //создать (если нет) либо открыть если есть и записать текст (путем замены если что то      было   записано)
-            System.IO.File.WriteAllText("D:\\TestFile.txt", "текст");
-
-            //создает новый  если такого нет , либо открывает имеющийся и пишет путем добавления 
-            System.IO.File.AppendAllText("D:\\TestFile.txt", "текст");
-
-            //получить доступ к  существующему либо создать новый
-            StreamWriter file = new StreamWriter("D:\\TestFile.txt");
-            //записать в него
-            file.Write("текст");
-            //закрыть для сохранения данных
-            file.Close();
+            string OutputText = Convert.ToString(OutputNumber);
+            string folder = @"C:\Users\MSI\Desktop\Output.txt"; 
+            File.WriteAllText(folder, OutputText);
+            Console.WriteLine("Программа посчитала");
         }
-
-        static double Plus()
+        
+        static double Plus(double FirstNumber, double SecondNumber)
         {
-            return double(FirstNumber) + double(SecondNumber)
+            return FirstNumber + SecondNumber;
         }
-        static double Minus()
+        static double Minus(double FirstNumber, double SecondNumber)
         {
-            return double(FirstNumber) - double(SecondNumber)
+            return FirstNumber - SecondNumber;
         }
-        static double Divide()
+        static double Divide(double FirstNumber, double SecondNumber)
         {
-            return double(FirstNumber) / double(SecondNumber)
+            return FirstNumber / SecondNumber;
         }
-        static double Multiply()
+        static double Multiply(double FirstNumber, double SecondNumber)
         {
-            return double(FirstNumber) * double(SecondNumber)
+            return FirstNumber * SecondNumber;
         }
     }
 }
